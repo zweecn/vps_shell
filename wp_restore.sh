@@ -7,6 +7,8 @@ sql="data/${filename}/wp_blog.sql"
 
 date +%Y%m%d:%H%M
 
+cd ~/
+
 if [ -z $filename ]; then 
 	echo "database name is empty"
 	exit 1

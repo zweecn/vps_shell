@@ -7,38 +7,48 @@ wwwroot='/home/wwwroot'
 domain='blog.favorbook.com'
 sql_bak='wp_blog.sql'
 
+_log()
+{
+	echo "`date +%Y%m%d-%H:%M` $1"
+}
+
+_log "start ..."
+
+cd /root
+cur=`pwd`
+
 if [ -d $bak_dir ]; then
-	echo "Dir exists.";
+	_log "dir exist."
 	exit 1
 fi
 mkdir -p $bak_dir
 
-echo "cp wordpress files..."
+_log "cp wordpress files..."
 cp -r ${wwwroot}/${domain} $bak_dir
 if [ $? -ne -0 ]; then
-	echo "cp failed.";
+	_log "cp failed."
 	exit 1
 fi
 
 if [ ! -d data ]; then
 	mkdir data
 fi
-cd data
+cd ./data
 
-echo "tar all files..."
-tar -zcvf ${name}.tar.gz $name
+_log "tar all files..."
+tar -zcf ${name}.tar.gz $name
 if [ $? -ne -0 ]; then
-	echo "tar failed.";
+	_log "tar failed."
 	exit 1
 fi
 rm -rf $name
 
-#sz -be ${name}.tar.gz
-#if [ $? -ne -0 ]; then
-#	echo "sz failed.";
-#	exit 1
-#fi
-
+_log "scp to remote..."
 scp ${name}.tar.gz vincent@us.favorbook.com:~/data/
+if [ $? -ne -0 ]; then
+	_log "scp failed."
+	exit 1
+fi
 
-echo "Finished."
+_log "finished."
+
