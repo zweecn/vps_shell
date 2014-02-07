@@ -1,9 +1,9 @@
 #!/bin/bash
 
-db=`ls data/wp_db_*.tar.gz  | tail -n 1`
+db=`ls data/wiki_db_*.tar.gz  | tail -n 1`
 filename=`echo $db | cut -d'/' -f2 | cut -d'.' -f1`
 last=`cat data/last`
-sql="data/${filename}/wp_blog.sql"
+sql="data/${filename}/wiki_me.sql"
 
 _log()
 {

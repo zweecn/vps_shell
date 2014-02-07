@@ -44,7 +44,7 @@ fi
 rm -rf $name
 
 _log "scp to remote..."
-scp ${name}.tar.gz vincent@us.favorbook.com:~/data/
+# scp ${name}.tar.gz vincent@us.favorbook.com:~/data/
 if [ $? -ne -0 ]; then
 	_log "scp failed."
 	exit 1
